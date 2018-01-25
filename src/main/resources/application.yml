@@ -1,0 +1,48 @@
+################################################################
+################################################################
+#                      Deployment Profiles                     #
+################################################################
+
+################################################################
+#                      Local Or Default                        #
+################################################################
+
+server:
+  port: 9000
+  contextPath: /BLCamPOC
+javamelody:
+  enabled: true
+  spring-monitoring-enabled: true
+  advisor-auto-proxy-creator-enabled: false
+  scheduled-monitoring-enabled: true
+  init-parameters:
+    log: true
+    authorized-users: melody:melody*1
+    monitoring-path: /performance
+spring:
+  profiles: local, default
+  main:
+    #banner-mode: "off"
+logging:
+  level:
+    org.springframework.web: INFO
+    com.sd.ap: INFO
+    logging.level.org.hibernate: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: D:/Workspace/GIT/logs/application.log
+datasource:
+  blcampoc:
+    url: jdbc:mysql://localhost:3306/blcampoc?useSSL=false
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      #create-drop -> for drop and create again schema
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
